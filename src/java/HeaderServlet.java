@@ -35,10 +35,10 @@ public class HeaderServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>RequestHeaders</title>");            
+            out.println("<title>HTTP Request Headers</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Request Header:</h1>");
+            out.println("<h1>Request Header</h1>");
             out.println("<table>");
             Enumeration e = request.getHeaderNames();
             while(e.hasMoreElements()) {
@@ -48,11 +48,11 @@ public class HeaderServlet extends HttpServlet {
             }
             out.println("</table>");
    
-            out.println("<h1>Client/Browser Information:</h1>");
+            out.println("<h1>Client/Browser</h1>");
             out.println("<h3>"+"Remote Address :"+request.getRemoteAddr()+"<h3>");
             out.println("<h3>"+"Remote Host :"+request.getRemoteHost()+"<h3>");
             
-            out.println("<h1>Server Information:</h1>");
+            out.println("<h1>Server</h1>");
             out.println("<h3>"+"Server Name:"+request.getServerName()+"<h3>");
             out.println("<h3>"+"Server Port :"+request.getServerPort()+"<h3>");
             out.println("</body>");
