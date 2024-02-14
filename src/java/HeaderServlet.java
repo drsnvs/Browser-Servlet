@@ -36,25 +36,36 @@ public class HeaderServlet extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>HTTP Request Headers</title>");            
+            out.println("<style> "
+                    + ".tableHeader{"
+                    + "background-color: pink;} "
+                    + "#headerTable{width:100%}"
+                    + ".ClientServer{width:50%;margin-top:20px}"
+                    + ".heading{text-align:\"left\"}"
+                    + "div{display: flex;}"
+                    + "th{text-align:left;padding:3px;background-color:#FFFF11;}"
+                    + "td{padding:3px;background-color:#E7E9EB;}"
+                    + "table{border:2px solid black}"
+                    + "</style>");            
             out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Request Header</h1>");
-            out.println("<table>");
+            out.println("<body bgcolor=white>");
+            out.println("<table id=\"headerTable\" border=1 cellspacing=0><tr><td colspan=2 align=center class=\"tableHeader\"><h1>Request Header</h1></td></tr>");
+//            out.println("<table border=1>");
             Enumeration e = request.getHeaderNames();
             while(e.hasMoreElements()) {
                 String name = (String)e.nextElement();
                 String value = request.getHeader(name);
-                out.println("<tr><td bgcolor='#12CABE'>" + name + "</td><td>" + value + "</td></tr>");
+                out.println("<tr><th bgcolor='#FFFFFF78'>" + name + "</th><td>" + value + "</td></tr>");
             }
             out.println("</table>");
    
-            out.println("<h1>Client/Browser</h1>");
-            out.println("<h3>"+"Remote Address :"+request.getRemoteAddr()+"<h3>");
-            out.println("<h3>"+"Remote Host :"+request.getRemoteHost()+"<h3>");
+            out.println("<div><table class=\"ClientServer\" border=1 cellspacing=0><tr><td colspan=2 align=\"center\" class=\"tableHeader\"><h1>Client/Browser</h1></td></tr>");
+            out.println("<tr><th class=\"heading\">Remote Address</th><td>"+request.getRemoteAddr()+"</td></tr>");
+            out.println("<tr><th>Remote Host</th><td>"+request.getRemoteHost()+"</td></tr></table>");
             
-            out.println("<h1>Server</h1>");
-            out.println("<h3>"+"Server Name:"+request.getServerName()+"<h3>");
-            out.println("<h3>"+"Server Port :"+request.getServerPort()+"<h3>");
+            out.println("<table class=\"ClientServer\" border=1 cellspacing=0><tr><td colspan=2 align=\"center\" class=\"tableHeader\"><h1>Server</h1></td></tr>");
+            out.println("<tr><th>Server Name</td><td>"+request.getServerName()+"</td></tr>");
+            out.println("<tr><th>Server Port</td><td>"+request.getServerPort()+"</td></tr></table></div>");
             out.println("</body>");
             out.println("</html>");
         }
