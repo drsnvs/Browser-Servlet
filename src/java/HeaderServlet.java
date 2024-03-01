@@ -7,10 +7,13 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author Darshan
@@ -38,7 +41,7 @@ public class HeaderServlet extends HttpServlet {
             out.println("<style> "
                     + ".tableHeader{"
                     + "background-color: pink;} "
-                    + "#headerTable{width:100%}"
+                    + ".headerTable{width:100%;}"
                     + ".ClientServer{width:50%;margin-top:20px}"
                     + ".heading{text-align:\"left\"}"
                     + "div{display: flex;}"
@@ -48,7 +51,7 @@ public class HeaderServlet extends HttpServlet {
                     + "</style>");            
             out.println("</head>");
             out.println("<body bgcolor=white>");
-            out.println("<table id=\"headerTable\" border=1 cellspacing=0><tr><td colspan=2 align=center class=\"tableHeader\"><h1>Request Header</h1></td></tr>");
+            out.println("<table class=\"headerTable\" border=1 cellspacing=0><tr><td colspan=2 align=center class=\"tableHeader\"><h1>Request Header</h1></td></tr>");
 //            out.println("<table border=1>");
             Enumeration e = request.getHeaderNames();
             while(e.hasMoreElements()) {
@@ -57,13 +60,25 @@ public class HeaderServlet extends HttpServlet {
                 out.println("<tr><th bgcolor='#FFFFFF78'>" + name + "</th><td>" + value + "</td></tr>");
             }
             out.println("</table>");
-   
+            
+            ServletConfig sc = getServletConfig();
+            ServletContext scc = getServletContext();
+            out.println("<table class=\"headerTable\" border=1 cellspacing=0><tr><td colspan=2 align=\"center\" class=\"tableHeader\"><h1>Init Parameter</h1></td></tr>");
+            out.println("<tr><th class=\"heading\">init parameter</th><td>"+sc.getInitParameter("User")+"</td></tr>");
+            out.println("<tr><th>init context</td><td>"+scc.getInitParameter("db")+"</td></tr>");
+            out.println("<tr><th>servletname</td><td>"+sc.getServletName()+"</td></tr></table>");
+            
+            
             out.println("<div><table class=\"ClientServer\" border=1 cellspacing=0><tr><td colspan=2 align=\"center\" class=\"tableHeader\"><h1>Client/Browser</h1></td></tr>");
             out.println("<tr><th class=\"heading\">Remote Address</th><td>"+request.getRemoteAddr()+"</td></tr>");
+            out.println("<tr><th>Mehod</td><td>"+request.getMethod()+"</td></tr>");
+            out.println("<tr><th>Session</td><td>"+request.getSession()+"</td></tr>");
             out.println("<tr><th>Remote Host</th><td>"+request.getRemoteHost()+"</td></tr></table>");
+            
             
             out.println("<table class=\"ClientServer\" border=1 cellspacing=0><tr><td colspan=2 align=\"center\" class=\"tableHeader\"><h1>Server</h1></td></tr>");
             out.println("<tr><th>Server Name</td><td>"+request.getServerName()+"</td></tr>");
+            out.println("<tr><th>Scheme</td><td>"+request.getScheme()+"</td></tr>");
             out.println("<tr><th>Server Port</td><td>"+request.getServerPort()+"</td></tr></table></div>");
             out.println("</body>");
             out.println("</html>");

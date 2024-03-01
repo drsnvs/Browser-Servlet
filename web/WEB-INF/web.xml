@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <context-param>
+        <param-name>db</param-name>
+        <param-value>com.jdbc.mysql.Driver</param-value>
+    </context-param>
     <servlet>
-        <servlet-name>Calculate</servlet-name>
-        <servlet-class>Calculate</servlet-class>
+        <servlet-name>HeaderServlet</servlet-name>
+        <servlet-class>HeaderServlet</servlet-class>
+        <init-param>
+            <param-name>User</param-name>
+            <param-value>Darshan</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Calculate</servlet-name>
-        <url-pattern>/Calculate</url-pattern>
+        <servlet-name>HeaderServlet</servlet-name>
+        <url-pattern>/HeaderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -16,4 +24,5 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <init-param/>
 </web-app>
